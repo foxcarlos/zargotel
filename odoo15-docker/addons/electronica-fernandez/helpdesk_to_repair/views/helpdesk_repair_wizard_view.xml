@@ -1,0 +1,49 @@
+<odoo>
+    <record id="view_helpdesk_repair_wizard_form" model="ir.ui.view">
+        <field name="name">helpdesk_to_repair_wizard_form</field>
+        <field name="model">helpdesk.repair.wizard</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Export from Helpdesk to repair Wizard">
+                <sheet>
+                <group>
+                    <field name="t_ticket_id" readonly="1" string="Ticket ID"/>
+                    <field name="t_number" readonly="1" string="Number"/>
+                    <field name="t_name" readonly="1" string="Name"/>
+                    <field name="r_user_id" widget="res_partner_many2one" readonly="1" string="Responsible person"/>
+                    <field name="r_priority" widget="priority" readonly="1" string="Priority"/>
+                    <field name="r_partner_id" widget="res_partner_many2one" readonly="1" string="Client"/>
+                    <field name="r_tag_ids" widget="many2many_tags" readonly="1" string="Repair tags"/>
+                    <field name="r_description" widget="pad" readonly="1" string="Description"/>
+                </group>
+                <separator string="Complete the data" style="text-decoration: underline; color:#01579B"/>
+                <group>
+                    <field name="r_product_id" string="Product repair" required="True"/>
+                    <field name="r_product_qty" string="Product quantity"/>
+                    <field name="r_sale_order_id" string="Sale order"/>
+                    <field name="r_schedule_date" widget="date" string="Schedule date"/>
+                    <field name="r_location_id" string="Location" required="True"/>
+                    <field name="r_guarantee_limit" widget="date" string="Guarantee limit"/>
+                    <field name="r_invoiced_method" widget="selection" string="Invoice method" required="True"/>
+                    <field name="r_route_id" string="Route"/>
+                </group>
+                </sheet>
+                <footer>
+                    <button string="Export" name="apply" type="object" class="btn-primary"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_helpdesk_repair_wizard" model="ir.actions.act_window">
+        <field name="name">helpdesk_repair_action_wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">helpdesk.repair.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_helpdesk_repair_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+
+</odoo>
+

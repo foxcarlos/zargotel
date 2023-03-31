@@ -1,0 +1,42 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="route_zone.route_tree">
+      <field name="name">Routes</field>
+      <field name="model">route.route</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="route_zone"/>
+          <field name = "zip"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="route_zone.route_form">
+      <field name="name">Routes</field>
+      <field name="model">route.route</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <field name="name"/>
+               <field name="route_zone"/>
+               <field name = "zip"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+    
+
+    <record model="ir.actions.act_window" id="route_zone.route_action_window">
+      <field name="name">Routes</field>
+      <field name="res_model">route.route</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Routes" id="route_zone.list" parent="route_zone.route"
+              action="route_zone.route_action_window"/>
+   
+  </data>
+</odoo>

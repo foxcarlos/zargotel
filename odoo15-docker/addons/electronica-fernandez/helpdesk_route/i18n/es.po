@@ -1,0 +1,28 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* helpdesk_route
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-20 07:07+0000\n"
+"PO-Revision-Date: 2023-03-20 08:08+0100\n"
+"Last-Translator: Vicente Falco <vfalco@nextads.es>\n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 3.2.2\n"
+
+#. module: helpdesk_route
+#: model:ir.model,name:helpdesk_route.model_repair_order
+msgid "Repair Order"
+msgstr "Orden de reparación"
+
+#. module: helpdesk_route
+#: model:ir.model.fields,field_description:helpdesk_route.field_repair_order__route
+msgid "Route"
+msgstr "Ruta"

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="helpdesk_mgmt_form_inherit" model="ir.ui.view">
+            <field name="name">helpdesk_repair_form_inherit</field>
+            <field name="model">helpdesk.ticket</field>
+            <field name="inherit_id" ref="helpdesk_mgmt.ticket_view_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='assign_to_me']" position="after">
+                    <button name="open_wizard"
+                            string="Export to repair"
+                            type="object"
+                            attrs="{'invisible': [('stage_id', '!=', 1)]}"
+                            context="{'default_ticket_id': id , 'default_number': number,
+                                      'default_name': name, 'default_stage_id': stage_id,
+                                      'default_team_id': team_id, 'default_user_id': user_id,
+                                      'default_priority': priority, 'default_create_date': create_date,
+                                      'default_channel_id': channel_id, 'default_partner_id': partner_id,
+                                      'default_partner_name': partner_name, 'default_partner_email': partner_email,
+                                      'default_category_id': category_id, 'default_tag_ids': tag_ids,
+                                      'default_description': description, 'default_last_stage_update': last_stage_update,
+                                      'default_assigned_date': assigned_date, 'default_closed_date': closed_date,
+                                      'default_message_ids': message_ids}"
+                            class="btn-primary"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
