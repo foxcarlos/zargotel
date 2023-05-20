@@ -98,7 +98,6 @@
                             <th name="th_priceunit" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>PRECIO</span></th>
                             <th name="th_dto" class="text-right"><span>DTO</span></th>
 
-
                             <th name="th_subtotal" class="text-right">
                                 <span groups="account.group_show_line_subtotals_tax_excluded">TOTAL</span>
 <!--                                <span groups="account.group_show_line_subtotals_tax_included">Total Price</span>-->
@@ -127,42 +126,49 @@
                                     <td t-if="display_discount" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
                                         <span class="text-nowrap" t-field="line.discount"/>
                                     </td>
+
                                     <td t-attf-class="text-left {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
-                                        <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.tax_ids))" id="line_tax_ids"/>
+                                        <!-- LINEA QUE AGREGA LA PALABRA IVA, NO SACAR EL t-attf-class-->
+<!--                                    <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.tax_ids))" id="line_tax_ids"/>-->
                                     </td>
+
                                     <td class="text-right o_price_total">
                                         <span class="text-nowrap" t-field="line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
                                         <span class="text-nowrap" t-field="line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
                                     </td>
                                 </t>
-                                <t t-if="line.display_type == 'line_section'">
-                                    <td colspan="99">
-                                        <span t-field="line.name" t-options="{'widget': 'text'}"/>
-                                    </td>
-                                    <t t-set="current_section" t-value="line"/>
-                                    <t t-set="current_subtotal" t-value="0"/>
-                                </t>
-                                <t t-if="line.display_type == 'line_note'">
-                                    <td colspan="99">
-                                        <span t-field="line.name" t-options="{'widget': 'text'}"/>
-                                    </td>
-                                </t>
                             </tr>
-
-                            <t t-if="current_section and (line_last or lines[line_index+1].display_type == 'line_section')">
-                                <tr class="is-subtotal text-right">
-                                    <td colspan="99">
-                                        <strong class="mr16">Subtotal</strong>
-                                        <span
-                                            t-esc="current_subtotal"
-                                            t-options='{"widget": "monetary", "display_currency": o.currency_id}'
-                                        />
-                                    </td>
-                                </tr>
-                            </t>
                         </t>
                     </tbody>
                 </table>
+            </xpath>
+<!--            Los Total Tax-->
+            <xpath expr="//div[@id='total']/div" position="attributes">
+                <attribute name="t-attf-class">#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'}</attribute>
+            </xpath>
+
+            <xpath expr="//div[@id='total']/div" position="replace">
+                    <div class="col-12">
+                        <table class="table table-bordered table-sm border-dark mb-2">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">IMPORTE</th>
+                                    <th class="text-center">DESCUENTO</th>
+                                    <th class="text-center">PRONTO PAGO</th>
+                                    <th class="text-center">VACIO</th>
+                                    <th class="text-center">BASE</th>
+                                    <th class="text-center">TIPO</th>
+                                    <th class="text-center">I.V.A.</th>
+                                    <th class="text-center">R.E.</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center"><span t-field="o.invoice_origin"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
             </xpath>
 
         </template>
