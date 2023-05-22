@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
+        <template id="external_layout_inherit" inherit_id="web.external_layout_standard">
+
+            <xpath expr="//div[@style='border-bottom: 1px solid black;']" position="replace"/>
+            <xpath expr="//div[@class='col-3 mb4']" position="replace">
+                <div class="col-6">
+                    <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo"/>
+                </div>
+            </xpath>
+            <xpath expr="//div[@class='text-center'][@style='border-top: 1px solid black;']" position="replace">
+                <!-- Aquí va el mismo div pero sin el style -->
+                <div class="text-center" style="border-top: none;">
+                    <ul class="list-inline mb4">
+                        <div t-field="company.report_footer"/>
+                    </ul>
+
+                    <div t-if="report_type == 'pdf'" class="text-muted">
+                        Page: <span class="page"/> / <span class="topage"/>
+                    </div>
+                </div>
+            </xpath>
+
+        </template>
+
         <template id="report_invoice_document_inherit" inherit_id="account.report_invoice_document">
             <xpath expr="//t[@t-set='address']" position="replace">
                 <div class="row">
@@ -167,7 +190,7 @@
                                     <th class="text-center">IMPORTE</th>
                                     <th class="text-center">DESCUENTO</th>
                                     <th class="text-center">PRONTO PAGO</th>
-                                    <th class="text-center">    </th>
+                                    <th class="text-center" style="width:100px;">    </th>
                                     <th class="text-center">BASE</th>
                                     <th class="text-center">TIPO</th>
                                     <th class="text-center">I.V.A.</th>
@@ -192,9 +215,12 @@
 <!--                                </tr>-->
                             </tbody>
                             <tfoot style="border: none;">
-                                <tr class="border-black">
-                                    <td colspan="5" style="border: none;"></td>
-                                    <td colspan="3">TOTAL 164,50</td>
+                                <tr>
+                                    <td colspan="5" style="border: none;"/>
+                                    <td colspan="3">
+                                        <strong class="mr16">TOTAL: </strong>
+                                        <span t-esc="tax_totals['amount_total']"/>
+                                    </td>
                                 </tr>
                             </tfoot>
                         </table>
