@@ -4,20 +4,31 @@
         <template id="external_layout_inherit" inherit_id="web.external_layout_standard">
 
             <xpath expr="//div[@style='border-bottom: 1px solid black;']" position="replace"/>
+
             <xpath expr="//div[@class='col-3 mb4']" position="replace">
                 <div class="col-6">
                     <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo"/>
                 </div>
             </xpath>
-            <xpath expr="//div[@class='text-center'][@style='border-top: 1px solid black;']" position="replace">
-                <!-- Aquí va el mismo div pero sin el style -->
-                <div class="text-center" style="border-top: none;">
-                    <ul class="list-inline mb4">
-                        <div t-field="company.report_footer"/>
-                    </ul>
 
-                    <div t-if="report_type == 'pdf'" class="text-muted">
-                        Page: <span class="page"/> / <span class="topage"/>
+            <xpath expr="//div[contains(@t-attf-class, 'footer o_standard_footer o_company_')]" position="replace">
+                <div class="row">
+                    <div class="col-12">
+                        <span t-field="company.report_footer"/>
+                    </div>
+                    <div class="col-12">
+<!--                        <span t-if="company.company_details" style="text-align: center; display: block;">-->
+                        <span style="text-align: center; display: block;">
+                            Tel: 96 127 72 29 www.electrofernandez.es electrofernandez@electrofernandez.es
+                        </span>
+                    </div>
+                    <div class="col-4">
+                        <h5 class="mt0 mb0" t-field="company.report_header"/>
+                    </div>
+                    <div class="col-12">
+                        <ul t-if="report_type == 'pdf'" class="list-inline pagenumber float-right text-center">
+                            <li class="list-inline-item"><strong><span class="page"/></strong></li>
+                        </ul>
                     </div>
                 </div>
             </xpath>
@@ -58,7 +69,13 @@
             <xpath expr="//div[@id='qrcode']" position="replace"/>
 
             <xpath expr="//div[@class='page']" position="before">
-                <div class="row">
+                <style>
+                .row-with-margin {
+                    margin-bottom: 20px;
+                }
+                </style>
+
+                <div class="row row-with-margin">
                     <div class="col-6">
                         <table class="table table-bordered table-sm border-dark mb-2">
                             <thead>
@@ -81,7 +98,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row row-with-margin">
                     <div class="col-12">
                         <table class="table table-bordered table-sm border-dark mb-2">
                             <thead>
@@ -119,7 +136,7 @@
             </xpath>
 
             <xpath expr="//table[@name='invoice_line_table']" position="replace">
-                <div class="row">
+                <div class="row row-with-margin">
                     <div class="col-12">
                         <table class="table table-bordered table-sm border-dark mb-2" name="invoice_line_table">
                             <thead>
@@ -210,18 +227,17 @@
                                         <td class="text-center"><span /></td>
                                     </tr>
                                 </t>
-<!--                                <tr>-->
-<!--                                    <td colspan="2" class="table-active">Larry the Bird</td>-->
-<!--                                </tr>-->
+
                             </tbody>
-                            <tfoot style="border: none;">
+                            <tfoot>
                                 <tr>
-                                    <td colspan="5" style="border: none;"/>
+                                    <td colspan="5"/>
                                     <td colspan="3">
                                         <strong class="mr16">TOTAL: </strong>
                                         <span t-esc="tax_totals['amount_total']"/>
                                     </td>
                                 </tr>
+
                             </tfoot>
                         </table>
                     </div>
