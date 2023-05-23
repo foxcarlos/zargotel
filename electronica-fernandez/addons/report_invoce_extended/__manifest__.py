@@ -12,7 +12,7 @@
     'data': [
         # 'security/ir.model.access.csv',
         'views/report_invoice.xml',
-        'views/account_move.xml',
+        # 'views/account_move.xml',
     ],
     'application': True,
     'installable': True,

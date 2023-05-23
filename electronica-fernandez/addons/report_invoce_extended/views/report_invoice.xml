@@ -11,25 +11,9 @@
                 </div>
             </xpath>
 
-            <xpath expr="//div[contains(@t-attf-class, 'footer o_standard_footer o_company_')]" position="replace">
-                <div class="row">
-                    <div class="col-12">
-                        <span t-field="company.report_footer"/>
-                    </div>
-                    <div class="col-12">
-<!--                        <span t-if="company.company_details" style="text-align: center; display: block;">-->
-                        <span style="text-align: center; display: block;">
-                            Tel: 96 127 72 29 www.electrofernandez.es electrofernandez@electrofernandez.es
-                        </span>
-                    </div>
-                    <div class="col-4">
-                        <h5 class="mt0 mb0" t-field="company.report_header"/>
-                    </div>
-                    <div class="col-12">
-                        <ul t-if="report_type == 'pdf'" class="list-inline pagenumber float-right text-center">
-                            <li class="list-inline-item"><strong><span class="page"/></strong></li>
-                        </ul>
-                    </div>
+            <xpath expr="//div[@t-field='company.report_footer']" position="after">
+                <div style="display: flex; justify-content: center; align-items: center; font-weight: bold;">
+                    Tel: 96 127 72 29 www.electrofernandez.es electrofernandez@electrofernandez.es
                 </div>
             </xpath>
 
@@ -71,7 +55,7 @@
             <xpath expr="//div[@class='page']" position="before">
                 <style>
                 .row-with-margin {
-                    margin-bottom: 20px;
+                    margin-bottom: 10px;
                 }
                 </style>
 
