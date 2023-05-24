@@ -199,7 +199,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <t t-foreach="tax_totals['groups_by_subtotal']['Untaxed Amount']" t-as="subtotal">
+                                <t t-foreach="tax_totals['groups_by_subtotal']['Importe libre de impuestos']" t-as="subtotal">
                                     <tr>
                                         <td class="text-center"><span t-esc="subtotal['tax_group_base_amount']"/></td>
                                         <td class="text-center"><span/></td>
